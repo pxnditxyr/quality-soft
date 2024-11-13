@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components'
 import Navbar from '@/modules/shared/components/ui/Navbar.astro'
 
 const links = [
@@ -36,4 +37,26 @@ const links = [
 
 ---
 
-<Navbar links={ links } />
+<Navbar links={ links }>
+  <button
+    class="flex items-center space-x-2 text-red-500 signout-button"
+  >
+    <Icon name="mdi:logout" size={ 24 } />
+    Cerrar Sesión
+  </button>
+</Navbar>
+
+<script>
+import { navigate } from 'astro:transitions/client'
+const { signOut } = await import( 'auth-astro/client' )
+
+const signoutButtons = document.querySelectorAll( '.signout-button' )
+
+signoutButtons.forEach( button => {
+  button.addEventListener( 'click', async () => {
+    await signOut()
+    navigate( '/auth/signin' )
+  } )
+} )
+
+</script>

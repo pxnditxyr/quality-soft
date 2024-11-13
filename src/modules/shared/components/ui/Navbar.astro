@@ -23,6 +23,7 @@ const { links } = Astro.props
       id="desktop-navbar"
     >
       <Nav links={ links } />
+      <slot />
     </div>
 
     <button
@@ -47,6 +48,9 @@ const { links } = Astro.props
     id="mobile-navbar"
   >
     <Nav links={ links } />
+    <div class="p-4 border-t-2 border-gray-300">
+      <slot />
+    </div>
   </div>
 
 </header>
