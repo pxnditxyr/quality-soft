@@ -20,6 +20,16 @@ import 'sweetalert2/dist/sweetalert2.min.css'
       Seed Users
     </button>
   </div>
+
+  <div class="w-full flex flex-wrap justify-center items-center mt-8 p-4">
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2"
+      id="seed-technologies"
+    >
+      <Icon name="mdi:database-import" size={ 20 } />
+      Seed Technologies
+    </button>
+  </div>
 </Layout>
 
 <script>
@@ -42,6 +52,29 @@ seedUsersButton.addEventListener( 'click', async () => {
       icon: 'success',
       title: 'Success',
       text: 'Users seeded successfully',
+    } )
+  }
+})
+
+const seedTechnologies = document.querySelector( '#seed-technologies' ) as HTMLButtonElement
+
+seedTechnologies.addEventListener( 'click', async ( _e ) => {
+  if ( !confirm( 'Are you sure you want to seed the technologies?' ) ) return
+
+  const { error } = await actions.technologiesSeed()
+
+  if ( error ) {
+    console.log({ error })
+    Swal.fire( {
+      icon: 'error',
+      title: 'Error',
+      text: 'Technologies seeded failed',
+    } )
+  } else {
+    Swal.fire( {
+      icon: 'success',
+      title: 'Success',
+      text: 'Technologies seeded successfully',
     } )
   }
 })
