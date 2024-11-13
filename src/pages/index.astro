@@ -1,0 +1,210 @@
+---
+import Layout from '@/modules/shared/layouts/Layout.astro'
+import PublicNavbar from '@/modules/public/components/ui/PublicNavbar.astro'
+import { Icon } from 'astro-icon/components'
+
+
+---
+
+<Layout>
+  <div class="w-full">
+    <div class="fixed w-full bg-white">
+      <PublicNavbar />
+    </div>
+    <section class="w-full bg-black" id="home">
+      <div
+        class="w-full min-h-[800px] flex flex-col items-center justify-end text-white"
+        style={{
+          backgroundImage: "url('https://qualitysoft-1f745.web.app/img/developer.gif')",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div class="bg-black bg-opacity-50 p-8 mb-20 flex flex-col items-center justify-center max-w-3xl text-center gap-12">
+          <h1 class="text-4xl md:text-8xl font-extrabold uppercase">QualitySoft</h1>
+          <p class="text-xl md:text-2xl text-center">
+            Soluciones innovadoras y personalizadas en desarrollo de
+            software. Impulsa la eficiencia y el crecimiento de tu
+            negocio con nuestras soluciones tecnológicas a medida
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap items-center">
+          <div class="w-full md:w-1/2 mb-10 md:mb-0">
+            <img
+              src="https://qualitysoft-1f745.web.app/img/qua.png"
+              alt="QualitySoft"
+              class="rounded-lg shadow-xl"
+            />
+          </div>
+          <div class="w-full md:w-1/2 md:pl-10">
+            <h2 class="text-4xl font-bold mb-6">¿Quiénes Somos? 🚀</h2>
+            <p class="mb-6 text-pretty">
+              QualitySoft, fundada en 2024, ofrece soluciones innovadoras en desarrollo de software, incluyendo aplicaciones web, móviles y sistemas empresariales. Nuestro nuevo proyecto "Manos a la Obra: Plataforma de Servicios Inmediatos" refleja nuestro compromiso con la innovación.
+            </p>
+            <h3 class="text-2xl font-semibold mb-4">Misión y Visión 🎯</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="flex flex-col gap-4">
+                <p class="text-xl font-medium">Misión:</p>
+                <p class="text-pretty">Brindar soluciones de software de alta calidad que impulsen la eficiencia y el crecimiento de los negocios.</p>
+              </div>
+              <div class="flex flex-col gap-4">
+                <p class="text-xl font-medium">Visión:</p>
+                <p class="text-pretty">Ser líderes en desarrollo de software, reconocidos por entregar soluciones innovadoras que superen las expectativas del cliente.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="services" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Servicios Innovadores y Personalizados 💡</h2>
+        <p class="text-center mb-12 max-w-2xl mx-auto text-lg">
+          QualitySoft ofrece soluciones innovadoras en desarrollo de software, enfocándose en aplicaciones web, móviles y sistemas empresariales.
+        </p>
+        <div class="grid md:grid-cols-3 gap-8">
+          {
+            [
+              { title: "TRABAJOS", icon: "💼", image: "https://qualitysoft-1f745.web.app/img/trabajos.jpg", description: "Desarrollamos plataformas web para conectar empleadores y buscadores de empleo." },
+              { title: "MEDICINA", icon: "🏥", image: "https://qualitysoft-1f745.web.app/img/medicina.jpg", description: "Creamos software médico para mejorar la eficiencia en el cuidado de la salud." },
+              { title: "APLICACIONES WEB", icon: "🌐", image: "https://qualitysoft-1f745.web.app/img/aplicaciones-web.jpg", description: "Ofrecemos soluciones web a medida, desde sistemas de gestión hasta plataformas de e-commerce." }
+            ].map( ( service ) => (
+            <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+              <img src={ service.image } alt={ service.title } class="w-full h-48 object-cover" />
+              <div class="p-6">
+                <h3 class="text-2xl font-semibold mb-2">{ service.icon } { service.title }</h3>
+                <p class="mb-4">{service.description}</p>
+                <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+            ) )
+          }
+        </div>
+      </div>
+    </section>
+    <section id="projects" class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Proyectos 🏗️</h2>
+        <p class="text-center mb-12 max-w-2xl mx-auto">
+          Descubre nuestras soluciones innovadoras en desarrollo de software, desde aplicaciones web hasta sistemas empresariales.
+        </p>
+        <div class="grid md:grid-cols-3 gap-8">
+          {
+          [
+            { title: "Health for your Respiratory System", image: "https://qualitysoft-1f745.web.app/img/medee.jpg" },
+            { title: "Gestión de documentos UPCH y COFADENA", image: "https://qualitysoft-1f745.web.app/img/cofas.png" },
+            { title: "Pet Care App", image: "https://qualitysoft-1f745.web.app/img/pets.jpg" }
+          ].map( ( project ) => (
+          <div class="group relative overflow-hidden rounded-lg shadow-lg">
+            <img src={ project.image } alt={project.title} class="w-full h-64 object-cover transition duration-300 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+              <h3 class="text-white text-xl font-semibold text-center px-4">{project.title}</h3>
+            </div>
+          </div>
+          ) )
+          }
+        </div>
+      </div>
+    </section>
+    <section id="technologies" class="py-20 bg-gray-800 text-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Tecnologías Utilizadas 🛠️</h2>
+        <p class="text-center mb-12 max-w-2xl mx-auto">
+          En QualitySoft, utilizamos tecnologías como JavaScript, Python, React y Angular para desarrollar soluciones de software innovadoras.
+        </p>
+        <div class="flex flex-wrap justify-center items-center gap-8">
+          { [
+          'https://qualitysoft-1f745.web.app/img/python.png',
+          'https://qualitysoft-1f745.web.app/img/word.png',
+          'https://qualitysoft-1f745.web.app/img/angular.png',
+          'https://qualitysoft-1f745.web.app/img/js.png',
+          'https://qualitysoft-1f745.web.app/img/post.png',
+          'https://qualitysoft-1f745.web.app/img/mysql.png'
+          ].map( ( tech ) => (
+            <div class="bg-white p-4 rounded-full shadow-lg">
+              <img src={ tech } alt={ tech } class="w-20 h-20 object-contain" />
+            </div>
+          ) ) }
+        </div>
+      </div>
+    </section>
+    <section id="team" class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Equipo QualitySoft 👥</h2>
+        <p class="text-center mb-12 max-w-2xl mx-auto">Conozca a los profesionales detrás de nuestras innovaciones.</p>
+        <div class="grid md:grid-cols-4 gap-8">
+          {
+          [
+            { name: "Yerko Ibañez", role: "Director" },
+            { name: "Jheison Quispe", role: "Designer" },
+            { name: "Paola Carlo", role: "Designer" },
+            { name: "Bryan Gutierrez", role: "Project Manager" }
+          ].map( ( member ) => (
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <img src="https://qualitysoft-1f745.web.app/img/ing.png" alt={member.name} class="w-full h-64 object-cover" />
+            <div class="p-6 text-center">
+              <h3 class="text-xl font-semibold mb-2">{member.name}</h3>
+              <p class="text-gray-600">{member.role}</p>
+            </div>
+          </div>
+          ) )
+          }
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="py-20 bg-blue-600 text-white">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full lg:w-2/3 px-4 mb-12 lg:mb-0">
+            <h2 class="text-4xl font-bold mb-6">Contáctanos 📞</h2>
+            <p class="mb-8">Llena los campos requeridos y haznos saber tus consultas.</p>
+            <form class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <input type="text" placeholder="Nombre" class="w-full px-4 py-2 rounded-lg text-gray-800" required />
+                <input type="email" placeholder="Email" class="w-full px-4 py-2 rounded-lg text-gray-800" required />
+              </div>
+              <textarea placeholder="Mensaje" rows={4} class="w-full px-4 py-2 rounded-lg text-gray-800" required></textarea>
+              <button type="submit" class="bg-white text-blue-600 font-bold py-2 px-6 rounded-lg hover:bg-gray-100 transition duration-300">
+                Enviar Mensaje
+              </button>
+            </form>
+          </div>
+          <div class="w-full lg:w-1/3 px-4">
+            <h3 class="text-2xl font-semibold mb-6">Información de Contacto</h3>
+            <div class="space-y-4">
+              <p class="flex items-center">
+                <Icon name="mdi:map-marker" size={ 30 } class="mr-2" />
+                La Paz-Bolivia, Calacoto-c/12
+              </p>
+              <p class="flex items-center">
+                <Icon name="mdi:phone" size={ 30 } class="mr-2" />
+                75815737
+              </p>
+            </div>
+            <div class="mt-8">
+              <h4 class="text-xl font-semibold mb-4">Síguenos</h4>
+              <div class="flex space-x-4">
+                <a href="https://facebook.com" class="hover:text-gray-300 transition duration-300">
+                  <Icon name="mdi:facebook" size={ 24 } />
+                </a>
+                <a href="https://twitter.com" class="hover:text-gray-300 transition duration-300">
+                  <Icon name="mdi:twitter" size={ 24 } />
+                </a>
+                <a href="https://youtube.com" class="hover:text-gray-300 transition duration-300">
+                  <Icon name="mdi:youtube" size={ 24 } />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

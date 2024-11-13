@@ -1,0 +1,39 @@
+---
+import Navbar from '@/modules/shared/components/ui/Navbar.astro'
+
+const links = [
+  {
+    title: 'quienes somos?',
+    href: '#about',
+    icon: 'mdi:information',
+  },
+  {
+    title: 'servicio',
+    href: '#services',
+    icon: 'mdi:briefcase',
+  },
+  {
+    title: 'proyectos',
+    href: '#projects',
+    icon: 'mdi:webpack',
+  },
+  {
+    title: 'Tecnologias',
+    href: '#technologies',
+    icon: 'mdi:react'
+  },
+  {
+    title: 'Nuestro Equipo',
+    href: '#team',
+    icon: 'mdi:account-group',
+  },
+  {
+    title: 'Contacto',
+    href: '#contact',
+    icon: 'mdi:email',
+  }
+]
+
+---
+
+<Navbar links={ links } />
