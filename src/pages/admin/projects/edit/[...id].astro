@@ -2,16 +2,16 @@
 import { actions } from 'astro:actions'
 import { Icon } from 'astro-icon/components'
 import AdminLayout from '@/modules/admin/layouts/AdminLayout.astro'
-import EditServiceForm from '@/modules/admin/components/forms/EditServiceForm.astro'
+import EditProjectForm from '@/modules/admin/components/forms/EditProjectForm.astro'
 
 import 'sweetalert2/dist/sweetalert2.min.css'
 
 const id = Astro.params.id
-const { data: serviceData, error: serviceError } = await actions.getOneService({ id })
+const { data: projectData, error: projectError } = await actions.getOneProject({ id })
 
-if ( serviceError ) return Astro.redirect( '/404' )
+if ( projectError ) return Astro.redirect( '/404' )
 
-const { service } = serviceData
+const { project } = projectData
 ---
 
 <AdminLayout>
@@ -19,24 +19,24 @@ const { service } = serviceData
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-12">
         <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-          👤 Editar Servicio
+          👤 Editar Proyecto
         </h1>
         <p class="mt-5 max-w-xl mx-auto text-xl text-gray-500">
-          Complete el formulario para editar la información del servicio.
+          Complete el formulario para editar la información
         </p>
       </div>
 
       <div class="bg-white shadow-2xl rounded-lg overflow-hidden">
         <div class="px-4 py-5 sm:px-6 bg-gradient-to-r from-slate-700 to-slate-900">
           <h3 class="text-lg leading-6 font-medium text-white flex">
-            <Icon name="mdi:account-plus" size={ 24 } class="mr-2" /> Información del Servicio
+            <Icon name="mdi:account-plus" size={ 24 } class="mr-2" /> Información del Proyecto
           </h3>
           <p class="mt-1 max-w-2xl text-sm text-gray-100">
             Todos los campos marcados con <span class="text-red-300">*</span> son obligatorios.
           </p>
         </div>
 
-        <EditServiceForm data={ service } />
+        <EditProjectForm data={ project } />
       </div>
     </div>
   </div>

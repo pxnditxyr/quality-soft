@@ -17,7 +17,7 @@ export const updateProject = defineAction({
     serviceId: z.string({ message: '📧 Los servicios es requerida.' }).min( 2, { message: '📧 Los servicios debe tener al menos 2 caracteres.' }),
   }),
   handler: async ({ id, title, imageUrl, description, client, startDate, endDate, category, serviceId }) => {
-    const currentData = await prisma.service.findUnique({
+    const currentData = await prisma.project.findUnique({
       where: { id }
     })
 
