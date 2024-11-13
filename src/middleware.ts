@@ -28,7 +28,7 @@ export const onRequest = defineMiddleware(
     }
 
     if ( !isAuthenticated && pathname.startsWith( '/admin' ) ) {
-      return redirect( '/auth/login' )
+      return redirect( '/auth/signin' )
     }
 
     return next()

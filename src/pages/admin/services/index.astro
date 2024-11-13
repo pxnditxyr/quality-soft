@@ -11,7 +11,7 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 
 const { data: servicesData, error: serviceError } = await actions.getAllServices()
 
-if ( serviceError ) return Astro.redirect( '/admin/dashboard' )
+if ( serviceError ) return Astro.redirect( '/admin' )
 
 const { services } = servicesData
 ---

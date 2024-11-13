@@ -11,7 +11,7 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 
 const { data: usersData, error: usersError } = await actions.getAllUsers()
 
-if ( usersError ) return Astro.redirect( '/admin/dashboard' )
+if ( usersError ) return Astro.redirect( '/admin' )
 
 const { users } = usersData
 

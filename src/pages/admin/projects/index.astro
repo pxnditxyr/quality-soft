@@ -11,7 +11,7 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 
 const { data: projectsData, error: projectError } = await actions.getAllProjects()
 
-if ( projectError ) return Astro.redirect( '/admin/dashboard' )
+if ( projectError ) return Astro.redirect( '/admin' )
 
 const { projects } = projectsData
 ---
