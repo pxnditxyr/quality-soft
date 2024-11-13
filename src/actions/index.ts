@@ -1,3 +1,4 @@
+import { createProject, getAllProjects, getOneProject, toggleStatusProject, updateProject } from './projects'
 import { technologiesSeed, usersSeed } from './seed'
 import { createService, getAllServices, getOneService, toggleStatusService, updateService } from './services'
 import { getAllTechnologies } from './technologies'
@@ -16,6 +17,12 @@ export const server = {
   createService,
   updateService,
   toggleStatusService,
+
+  getAllProjects,
+  getOneProject,
+  createProject,
+  updateProject,
+  toggleStatusProject,
 
   getAllTechnologies,
 

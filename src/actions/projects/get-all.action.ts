@@ -1,7 +1,7 @@
 import { prisma } from '@/db'
 import { defineAction } from 'astro:actions'
 
-export const getAllServices = defineAction({
+export const getAllProjects = defineAction({
   accept: 'json',
 
   handler: async () => {

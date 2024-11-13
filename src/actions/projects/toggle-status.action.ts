@@ -1,15 +1,15 @@
 import { prisma } from '@/db'
 import { defineAction } from 'astro:actions'
 
-export const toggleStatusService = defineAction({
+export const toggleStatusProject = defineAction({
   accept: 'json',
   handler: async ({ id }) => {
-    const currentData = await prisma.service.findUnique({
+    const currentData = await prisma.project.findUnique({
       where: { id }
     })
 
     if ( !currentData ) {
-      throw new Error( 'No se encontró el servicio. 💁‍♂️' )
+      throw new Error( 'No se encontró el proyecto. 💁‍♂️' )
     }
 
     await prisma.project.update({

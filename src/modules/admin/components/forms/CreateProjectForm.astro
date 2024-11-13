@@ -1,6 +1,16 @@
 ---
+import { actions } from 'astro:actions'
 import { Icon } from 'astro-icon/components'
 import Label from '@/modules/shared/components/forms/Label.astro'
+
+const { data: servicesData, error: servicesError } = await actions.getAllServices()
+if ( servicesError ) return Astro.redirect( '/admin/services' )
+
+const { services } = servicesData
+
+
+const today = new Date().toISOString().split( 'T' )[ 0 ]
+const tomorrow = new Date( new Date().getTime() + 24 * 60 * 60 * 1000 ).toISOString().split( 'T' )[ 0 ]
 
 const inputClass = 'w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-md focus:outline-none focus:border-indigo-600 sm:text-sm'
 
@@ -23,27 +33,49 @@ const inputs = [
     isRequired: true,
   },
   {
-    label: 'Icono',
-    name: 'icon',
-    type: 'text',
-    icon: 'mdi:format-list-checks',
-    placeholder: 'mdi:icon',
-    isRequired: true,
-  },
-  {
-    label: 'Avatar(Link)',
-    name: 'avatar',
+    label: 'Imagen(Link)',
+    name: 'imageUrl',
     type: 'text',
     icon: 'mdi:image',
     placeholder: 'https://example.com/avatar.jpg',
     isRequired: false,
-  }
+  },
+  {
+    label: 'Cliente',
+    name: 'client',
+    type: 'text',
+    icon: 'mdi:account',
+    placeholder: 'Ingrese el cliente del servicio',
+  },
+  {
+    label: 'Fecha de Inicio',
+    name: 'startDate',
+    type: 'date',
+    value: today,
+    icon: 'mdi:calendar',
+    placeholder: 'Ingrese la fecha de inicio del servicio',
+  },
+  {
+    label: 'Fecha de Finalización',
+    name: 'endDate',
+    type: 'date',
+    value: tomorrow,
+    icon: 'mdi:calendar',
+    placeholder: 'Ingrese la fecha de finalización del servicio',
+  },
+  {
+    label: 'Categoría',
+    name: 'category',
+    type: 'text',
+    icon: 'mdi:format-list-checks',
+    placeholder: 'Ingrese la categoría del servicio',
+  },
 ]
 
 ---
 
 <form
-  id="create-user-form"
+  id="create-project-form"
   class="px-4 py-5 sm:p-6"
 >
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -62,6 +94,7 @@ const inputs = [
           id={ input.name }
           type={ input.type as any }
           name={ input.name }
+          value={ ( input.value ) ? input.value : '' }
           class={ inputClass }
           placeholder={ input.placeholder }
         />
@@ -70,6 +103,29 @@ const inputs = [
     </div>
     ) )
     }
+    <div>
+      <Label
+        for={ `serviceId` }
+        isRequired={ true }
+      > { `Seleccione el servicio` } </Label>
+      <div class="mt-1 relative rounded-md shadow-sm">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <Icon name={ 'mdi:format-list-checks' } size={ 24 } class="text-gray-400" />
+        </div>
+        <select
+          id={ `serviceId` }
+          name={ `serviceId` }
+          class={ inputClass }
+        >
+          {
+          services.map( ( service ) => (
+          <option value={ service.id }>{ service.title }</option>
+          ) )
+          }
+        </select>
+      </div>
+      <p class="mt-2 text-sm text-red-600 hidden error" id={ `${ `serviceId` }-error` }></p>
+    </div>
   </div>
   <div class="mt-8">
     <p class="mt-2 text-sm text-red-600 hidden" id="default-error"></p>
@@ -80,7 +136,7 @@ const inputs = [
       class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-800 hover:bg-slate-950' focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-800 transition-colors duration-200"
     >
       <Icon name="mdi:account-plus" size={ 24 } class="mr-2" />
-      Agregar Usuario
+      Agregar Proyecto
     </button>
   </div>
 </form>
@@ -90,7 +146,7 @@ import { actions } from 'astro:actions'
 import { navigate } from 'astro:transitions/client'
 import { getErrorList } from '@/utils'
 
-const form = document.getElementById( 'create-user-form' ) as HTMLFormElement
+const form = document.getElementById( 'create-project-form' ) as HTMLFormElement
 
 form.addEventListener( 'submit', async ( event ) => {
   event.preventDefault()
@@ -98,7 +154,7 @@ form.addEventListener( 'submit', async ( event ) => {
 
   const formData = new FormData( form )
 
-  const { error } = await actions.createUser( formData )
+  const { error } = await actions.createProject( formData )
 
   if ( error ) {
     console.log({ error, errorType: typeof error })
@@ -111,10 +167,10 @@ form.addEventListener( 'submit', async ( event ) => {
         errorElement.classList.remove( 'hidden' )
       }
     }
-
     return
   }
 
-  navigate( '/admin/users' )
+  navigate( '/admin/projects' )
 } )
 </script>
+

@@ -2,7 +2,15 @@
 import Layout from '@/modules/shared/layouts/Layout.astro'
 import PublicNavbar from '@/modules/public/components/ui/PublicNavbar.astro'
 import { Icon } from 'astro-icon/components'
+import { actions } from 'astro:actions'
 
+const { data: servicesData, error: servicesError } = await actions.getAllServices()
+if ( servicesError ) return Astro.redirect( '/' )
+const { services } = servicesData
+
+const { data: projectsData, error: projectsError } = await actions.getAllProjects()
+if ( projectsError ) return Astro.redirect( '/' )
+const { projects } = projectsData
 
 ---
 
@@ -69,16 +77,12 @@ import { Icon } from 'astro-icon/components'
         </p>
         <div class="grid md:grid-cols-3 gap-8">
           {
-            [
-              { title: "TRABAJOS", icon: "💼", image: "https://qualitysoft-1f745.web.app/img/trabajos.jpg", description: "Desarrollamos plataformas web para conectar empleadores y buscadores de empleo." },
-              { title: "MEDICINA", icon: "🏥", image: "https://qualitysoft-1f745.web.app/img/medicina.jpg", description: "Creamos software médico para mejorar la eficiencia en el cuidado de la salud." },
-              { title: "APLICACIONES WEB", icon: "🌐", image: "https://qualitysoft-1f745.web.app/img/aplicaciones-web.jpg", description: "Ofrecemos soluciones web a medida, desde sistemas de gestión hasta plataformas de e-commerce." }
-            ].map( ( service ) => (
+            services.map( ( service ) => (
             <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-              <img src={ service.image } alt={ service.title } class="w-full h-48 object-cover" />
+              <img src={ service.imageUrl } alt={ service.title } class="w-full h-48 object-cover" />
               <div class="p-6">
                 <h3 class="text-2xl font-semibold mb-2">{ service.icon } { service.title }</h3>
-                <p class="mb-4">{service.description}</p>
+                <p class="mb-4">{ service.description }</p>
                 <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
                   Ver Más
                 </button>
@@ -97,15 +101,11 @@ import { Icon } from 'astro-icon/components'
         </p>
         <div class="grid md:grid-cols-3 gap-8">
           {
-          [
-            { title: "Health for your Respiratory System", image: "https://qualitysoft-1f745.web.app/img/medee.jpg" },
-            { title: "Gestión de documentos UPCH y COFADENA", image: "https://qualitysoft-1f745.web.app/img/cofas.png" },
-            { title: "Pet Care App", image: "https://qualitysoft-1f745.web.app/img/pets.jpg" }
-          ].map( ( project ) => (
+          projects.map( ( project ) => (
           <div class="group relative overflow-hidden rounded-lg shadow-lg">
-            <img src={ project.image } alt={project.title} class="w-full h-64 object-cover transition duration-300 group-hover:scale-110" />
+            <img src={ project.imageUrl } alt={ project.title } class="w-full h-64 object-cover transition duration-300 group-hover:scale-110" />
             <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 class="text-white text-xl font-semibold text-center px-4">{project.title}</h3>
+              <h3 class="text-white text-xl font-semibold text-center px-4">{ project.title }</h3>
             </div>
           </div>
           ) )

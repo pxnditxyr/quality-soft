@@ -3,7 +3,7 @@ import { defineAction } from 'astro:actions'
 import { z } from 'astro:schema'
 
 
-export const updateService = defineAction({
+export const updateProject = defineAction({
   accept: 'form',
   input: z.object({
     id: z.string({ message: '🆔 El id es requerido.' }),
@@ -22,7 +22,7 @@ export const updateService = defineAction({
     })
 
     if ( !currentData ) {
-      throw new Error( 'No se encontró el servicio. 💁‍♂️' )
+      throw new Error( 'No se encontró el proyecto. 💁‍♂️' )
     }
 
     await prisma.project.update({
@@ -30,8 +30,8 @@ export const updateService = defineAction({
       data: {
         title,
         client,
-        startDate,
-        endDate,
+        startDate: new Date( startDate ),
+        endDate: new Date( endDate ),
         category,
         serviceId,
         imageUrl: ( imageUrl ) ? imageUrl : 'https://savethefrogs.com/wp-content/uploads/placeholder-image-blue-landscape.png',
