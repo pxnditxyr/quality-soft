@@ -3,7 +3,7 @@ import { defineAction } from 'astro:actions'
 import { z } from 'astro:schema'
 
 
-export const createContactMessage = defineAction({
+export const createContact = defineAction({
   accept: 'form',
   input: z.object({
     name: z.string({ message: '📧 El nombre es requerido.' }).min( 2, { message: '📧 El nombre debe tener al menos 2 caracteres.' }),

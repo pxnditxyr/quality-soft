@@ -1,19 +1,20 @@
 import { prisma } from '@/db'
 import { defineAction } from 'astro:actions'
 
-export const getOneProject = defineAction({
+export const getOneContact = defineAction({
   accept: 'json',
   handler: async ({ id }) => {
-    const data = await prisma.project.findUnique({
+    const data = await prisma.contactMessage.findUnique({
       where: { id }
     })
 
     if ( !data ) {
-      throw new Error( 'No se pudo encontrar el proyecto. 💁‍♂️' )
+      console.log({ id })
+      throw new Error( 'No se pudo encontrar el contacto. 💁‍♂️' )
     }
 
     return {
-      project: data
+      contact: data
     }
   }
 })

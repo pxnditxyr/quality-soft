@@ -126,7 +126,7 @@ contactForm.addEventListener( 'submit', async () => {
 
   const formData = new FormData( contactForm )
 
-  const { error } = await actions.createContactMessage( formData )
+  const { error } = await actions.createContact( formData )
 
   if ( error ) {
     console.log({ error, errorType: typeof error })

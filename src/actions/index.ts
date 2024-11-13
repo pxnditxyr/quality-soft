@@ -1,4 +1,4 @@
-import { createContactMessage } from './contacts'
+import { createContact, getAllContacts, getOneContact, setAsAnsweredContact, setAsReadContact } from './contacts'
 import { createProject, getAllProjects, getOneProject, toggleStatusProject, updateProject } from './projects'
 import { technologiesSeed, usersSeed } from './seed'
 import { createService, getAllServices, getOneService, toggleStatusService, updateService } from './services'
@@ -25,7 +25,11 @@ export const server = {
   updateProject,
   toggleStatusProject,
 
-  createContactMessage,
+  getAllContacts,
+  getOneContact,
+  createContact,
+  setAsReadContact,
+  setAsAnsweredContact,
 
   getAllTechnologies,
 

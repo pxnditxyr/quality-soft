@@ -1,18 +1,18 @@
 import { prisma } from '@/db'
 import { defineAction } from 'astro:actions'
 
-export const getAllProjects = defineAction({
+export const getAllContacts = defineAction({
   accept: 'json',
 
   handler: async () => {
 
-    const [ projects, count ] = await prisma.$transaction([
-      prisma.project.findMany(),
-      prisma.project.count()
+    const [ contacts, count ] = await prisma.$transaction([
+      prisma.contactMessage.findMany(),
+      prisma.contactMessage.count()
     ])
 
     return {
-      projects,
+      contacts,
       total: count
     }
 
