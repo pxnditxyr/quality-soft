@@ -3,7 +3,7 @@ import { prisma } from '@/db'
 import { usersSeedData } from '@/seed'
 import bcrypt from 'bcryptjs'
 
-export const userSeed = defineAction({
+export const usersSeed = defineAction({
   accept: 'json',
   handler: async () => {
     const existsUser = await prisma.user.findUnique({

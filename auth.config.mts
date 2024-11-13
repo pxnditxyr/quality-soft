@@ -20,10 +20,10 @@ export default defineConfig({
         })
 
         if ( !user ) {
-          throw new Error( 'Parece que no existe un usuario con ese correo electrónico' )
+          throw new Error( 'Parece que no existe un usuario con ese correo electrónico 📧' )
         }
         if ( bcrypt.compareSync( password as string, user.password ) !== true ) {
-          throw new Error( 'La contraseña no coincide' )
+          throw new Error( 'La contraseña es incorrecta 🔒' )
         }
 
         const { password: _, ...userData } = user

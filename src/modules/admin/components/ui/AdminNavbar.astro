@@ -1,0 +1,39 @@
+---
+import Navbar from '@/modules/shared/components/ui/Navbar.astro'
+
+const links = [
+  {
+    title: 'Usuarios',
+    href: '/admin/users',
+    icon: 'mdi:account-group',
+  },
+  {
+    title: 'servicios',
+    href: '/admin/services',
+    icon: 'mdi:briefcase',
+  },
+  {
+    title: 'proyectos',
+    href: '/admin/projects',
+    icon: 'mdi:webpack',
+  },
+  {
+    title: 'Nuestro Equipo',
+    href: '/admin/team',
+    icon: 'mdi:account-group',
+  },
+  {
+    title: 'Mensajes',
+    href: '/admin/contact',
+    icon: 'mdi:message-text',
+  },
+  {
+    title: 'Info del Sitio',
+    href: '#contact',
+    icon: 'mdi:information',
+  }
+]
+
+---
+
+<Navbar links={ links } />

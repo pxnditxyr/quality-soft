@@ -1,28 +1,49 @@
 ---
 import Layout from '@/modules/shared/layouts/Layout.astro'
+import Title from '@/modules/shared/components/ui/Title.astro'
+import { Icon } from 'astro-icon/components'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 ---
 
 <Layout>
-  <div class="container mx-auto">
-    <h1 class="text-3xl font-bold">Seed Database</h1>
-    <p> Seed database page </p>
+  <Title class="mt-8">Seed Database</Title>
+  <p class="text-gray-500 text-xl"> Seed database page </p>
 
 
+  <div class="w-full flex flex-wrap justify-center items-center mt-8 p-4">
     <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center gap-2"
       id="seed-users"
     >
+      <Icon name="mdi:database-import" size={ 20 } />
       Seed Users
     </button>
-
   </div>
 </Layout>
 
 <script>
 import { actions } from 'astro:actions'
+import Swal from 'sweetalert2'
 
-const seedUsersButton = document.getElementById( 'seed-users' )
+const seedUsersButton = document.getElementById( 'seed-users' ) as HTMLButtonElement
 
+seedUsersButton.addEventListener( 'click', async () => {
+  const { error } = await actions.usersSeed()
+
+  if ( error ) {
+    Swal.fire( {
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+    } )
+  } else {
+    Swal.fire( {
+      icon: 'success',
+      title: 'Success',
+      text: 'Users seeded successfully',
+    } )
+  }
+})
 
 </script>
