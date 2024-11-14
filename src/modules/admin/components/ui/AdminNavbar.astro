@@ -42,7 +42,6 @@ const links = [
 </Navbar>
 
 <script>
-import { navigate } from 'astro:transitions/client'
 const { signOut } = await import( 'auth-astro/client' )
 
 const signoutButtons = document.querySelectorAll( '.signout-button' )
@@ -50,7 +49,7 @@ const signoutButtons = document.querySelectorAll( '.signout-button' )
 signoutButtons.forEach( button => {
   button.addEventListener( 'click', async () => {
     await signOut()
-    navigate( '/auth/signin' )
+    location.replace( '/' )
   } )
 } )
 
