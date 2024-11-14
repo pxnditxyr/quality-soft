@@ -13,6 +13,9 @@ const { data: projectsData, error: projectsError } = await actions.getAllProject
 if ( projectsError ) return Astro.redirect( '/' )
 const { projects } = projectsData
 
+const { data: teamMembarsData, error: teamMembersError } = await actions.getAllTeamMembers()
+if ( teamMembersError ) return Astro.redirect( '/' )
+const { teamMembers } = teamMembarsData
 ---
 
 <Layout>
@@ -99,8 +102,8 @@ const { projects } = projectsData
     <section id="projects" class="py-20">
       <div class="container mx-auto px-4">
         <h2 class="text-4xl font-bold text-center mb-12">Proyectos 🏗️</h2>
-        <p class="text-center mb-12 max-w-2xl mx-auto">
-          Descubre nuestras soluciones innovadoras en desarrollo de software, desde aplicaciones web hasta sistemas empresariales.
+        <p class="mb-12 max-w-2xl mx-auto font-semibold text-pretty">
+          🌐 Explora nuestras soluciones avanzadas en desarrollo de software, diseñadas para transformar tu negocio 🚀. Ofrecemos desde aplicaciones web modernas y personalizadas hasta sistemas empresariales robustos 🛠️ que optimizan la gestión y aumentan la eficiencia 📈.
         </p>
         <div class="grid md:grid-cols-3 gap-8">
           {
@@ -144,11 +147,7 @@ const { projects } = projectsData
         <p class="text-center mb-12 max-w-2xl mx-auto">Conozca a los profesionales detrás de nuestras innovaciones.</p>
         <div class="grid md:grid-cols-4 gap-8">
           {
-          [
-            { name: "Yerko Ibañez", role: "Director" },
-            { name: "Jheison Quispe", role: "Designer" },
-            { name: "Jhonnael Ivan Quispe", role: "Developer" }
-          ].map( ( member ) => (
+          teamMembers.filter( t => t.status ).map( ( member ) => (
           <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             <img src="https://qualitysoft-1f745.web.app/img/ing.png" alt={member.name} class="w-full h-64 object-cover" />
             <div class="p-6 text-center">
