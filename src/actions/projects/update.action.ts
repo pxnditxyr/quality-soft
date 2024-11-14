@@ -15,8 +15,9 @@ export const updateProject = defineAction({
     endDate: z.string({ message: '📧 La fecha de finalización es requerida.' }).min( 2, { message: '📧 La fecha de finalización debe tener al menos 2 caracteres.' }),
     category: z.string({ message: '📧 La categoría es requerida.' }).min( 2, { message: '📧 La categoría debe tener al menos 2 caracteres.' }),
     serviceId: z.string({ message: '📧 Los servicios es requerida.' }).min( 2, { message: '📧 Los servicios debe tener al menos 2 caracteres.' }),
+    link: z.string().optional(),
   }),
-  handler: async ({ id, title, imageUrl, description, client, startDate, endDate, category, serviceId }) => {
+  handler: async ({ id, title, imageUrl, description, client, startDate, endDate, category, serviceId, link }) => {
     const currentData = await prisma.project.findUnique({
       where: { id }
     })
@@ -34,6 +35,7 @@ export const updateProject = defineAction({
         endDate: new Date( endDate ),
         category,
         serviceId,
+        link: ( link ) ? link : null,
         imageUrl: ( imageUrl ) ? imageUrl : 'https://savethefrogs.com/wp-content/uploads/placeholder-image-blue-landscape.png',
         description
       }

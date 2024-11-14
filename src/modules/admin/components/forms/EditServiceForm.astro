@@ -11,6 +11,7 @@ interface Props {
     description: string
     icon: string | null
     imageUrl: string | null
+    link: string | null
   }
 }
 
@@ -52,7 +53,16 @@ const inputs = [
     icon: 'mdi:image',
     placeholder: 'https://example.com/avatar.jpg',
     isRequired: false,
-  }
+  },
+  {
+    label: 'Enlace al Servicio',
+    name: 'link',
+    type: 'text',
+    icon: 'mdi:link',
+    value: data.link,
+    placeholder: 'https://example.com',
+    isRequired: false,
+  },
 ]
 
 ---
@@ -116,7 +126,7 @@ form.addEventListener( 'submit', async ( event ) => {
 
   const formData = new FormData( form )
 
-  const { error } = await actions.updateTeamMember( formData )
+  const { error } = await actions.updateService( formData )
 
   if ( error ) {
     console.log({ error, errorType: typeof error })

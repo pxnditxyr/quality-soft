@@ -89,9 +89,9 @@ const { teamMembers } = teamMembarsData
                 <Icon name={ service.icon } size={ 30 } class="text-blue-500" />
                 { service.title }</h3>
                 <p class="mb-4">{ service.description }</p>
-                <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
+                <a href={ `/services/${ service.id }` } class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
                   Ver Más
-                </button>
+                </a>
               </div>
             </div>
             ) )
@@ -108,12 +108,18 @@ const { teamMembers } = teamMembarsData
         <div class="grid md:grid-cols-3 gap-8">
           {
           projects.filter( p => p.status ).map( ( project ) => (
-          <div class="group relative overflow-hidden rounded-lg shadow-lg">
+          <a
+            class="group relative overflow-hidden rounded-lg shadow-lg"
+            href={ `/projects/${ project.id }` }
+          >
             <img src={ project.imageUrl } alt={ project.title } class="w-full h-64 object-cover transition duration-300 group-hover:scale-110" />
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-              <h3 class="text-white text-xl font-semibold text-center px-4">{ project.title }</h3>
+            <div class="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 flex-col">
+              <h3 class="text-white text-xl font-semibold text-center px-4">
+                { project.title }
+              </h3>
+              <p class="text-white text-center px-4"> Haga clic para obtener más información </p>
             </div>
-          </div>
+          </a>
           ) )
           }
         </div>

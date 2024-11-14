@@ -16,6 +16,7 @@ const {
   title,
   description,
   imageUrl,
+  link,
   createdAt,
   updatedAt,
   status,
@@ -51,6 +52,29 @@ const {
                 <p class="font-medium">{ description }</p>
               </div>
             </div>
+
+            <div class="flex items-center">
+              <Icon name="mdi:link" size={ 24 } class="mr-3 text-slate-700" />
+              <div>
+                <p class="text-gray-600"> Enlace al Proyecto </p>
+                <p class="font-medium">
+                  {
+                    ( link ) ? (
+                      <a
+                        href={ ( link.startsWith( 'http' ) ) ? link : `https://${ link }` }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-blue-500 hover:underline"
+                      >
+                        { link }
+                      </a>
+                      ) : 'No disponible ❌'
+                  }
+                </p>
+              </div>
+            </div>
+
+
             <div class="flex items-center">
               <Icon name="mdi:calendar" size={ 24 } class="mr-3 text-slate-700" />
               <div>

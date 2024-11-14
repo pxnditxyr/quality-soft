@@ -19,6 +19,7 @@ interface Props {
     endDate: Date
     category: string
     serviceId: string
+    link: string | null
   }
 }
 
@@ -53,6 +54,15 @@ const inputs = [
     value: data.imageUrl,
     icon: 'mdi:image',
     placeholder: 'https://example.com/avatar.jpg',
+    isRequired: false,
+  },
+  {
+    label: 'Enlace al Proyecto',
+    name: 'link',
+    type: 'text',
+    icon: 'mdi:link',
+    value: data.link,
+    placeholder: 'https://example.com',
     isRequired: false,
   },
   {

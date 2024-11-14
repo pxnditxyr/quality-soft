@@ -10,14 +10,16 @@ export const createService = defineAction({
     icon: z.string({ message: '📧 El icono es requerido.' }).min( 2, { message: '📧 El icono debe tener al menos 2 caracteres.' }),
     imageUrl: z.string({ message: '📧 La imagen es requerida.' }).min( 2, { message: '📧 La imagen debe tener al menos 2 caracteres.' }),
     description: z.string({ message: '📧 La descripción es requerida.' }).min( 2, { message: '📧 La descripción debe tener al menos 2 caracteres.' }),
+    link: z.string().optional(),
   }),
-  handler: async ({ title, icon, imageUrl, description }) => {
+  handler: async ({ title, icon, imageUrl, description, link }) => {
     try {
       await prisma.service.create({
         data: {
           title,
           description,
           icon,
+          link: ( link ) ? link : null,
           imageUrl: ( imageUrl ) ? imageUrl : 'https://savethefrogs.com/wp-content/uploads/placeholder-image-blue-landscape.png',
         }
       })
