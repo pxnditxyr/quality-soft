@@ -6,60 +6,41 @@ const inputClass = 'w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-md f
 
 interface Props {
   data: {
-    id: string
     name: string
-    lastName: string
-    email: string
-    avatar: string | null
+    imageUrl: string | null
+    bio: string
+    role: string
   }
 }
 
 const { data } = Astro.props
+console.log({ data })
 
 const inputs = [
   {
     label: 'Nombre',
     name: 'name',
+    type: 'text',
     value: data.name,
-    type: 'text',
     icon: 'mdi:account',
-    placeholder: 'Ingrese su nombre',
+    placeholder: 'Ingrese el nombre del miembro del equipo',
     isRequired: true,
   },
   {
-    label: 'Apellido',
-    id: 'lastName',
-    name: 'lastName',
-    value: data.lastName,
+    label: 'Imagen(Link)',
+    name: 'imageUrl',
     type: 'text',
-    icon: 'mdi:account-outline',
-    placeholder: 'Ingrese su apellido',
-    isRequired: true,
-  },
-  {
-    label: 'Correo Electrónico',
-    name: 'email',
-    value: data.email,
-    type: 'text',
-    icon: 'mdi:email',
-    placeholder: 'example@gmail.com',
-    isRequired: true,
-  },
-  {
-    label: 'Avatar(Link)',
-    name: 'avatar',
-    value: data.avatar,
-    type: 'text',
+    value: data.imageUrl,
     icon: 'mdi:image',
     placeholder: 'https://example.com/avatar.jpg',
     isRequired: false,
-  }
+  },
 ]
 
 ---
 
 <form
-  id="update-user-form"
+  id="create-teamMember-form"
   class="px-4 py-5 sm:p-6"
 >
   <input type="hidden" name="id" value={ data.id } />
@@ -79,8 +60,8 @@ const inputs = [
           id={ input.name }
           type={ input.type as any }
           name={ input.name }
+          value={ input?.value ?? '' }
           class={ inputClass }
-          value={ input.value }
           placeholder={ input.placeholder }
         />
       </div>
@@ -88,6 +69,55 @@ const inputs = [
     </div>
     ) )
     }
+    <div class="col-span-2">
+      <Label
+        for={ `role` }
+        isRequired={ true }
+      > { `Seleccione el rol` } </Label>
+      <div class="mt-1 relative rounded-md shadow-sm">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <Icon name={ 'mdi:format-list-checks' } size={ 24 } class="text-gray-400" />
+        </div>
+        <select
+          id={ `role` }
+          name={ `role` }
+          class={ inputClass }
+        >
+          {
+          [
+            { id: 'designer', title: 'Diseñador' },
+            { id: 'developer', title: 'Desarrollador' },
+            { id: 'manager', title: 'Gerente' },
+          ].map( ( service ) => (
+          <option
+            value={ service.id }
+            selected={ data.role === service.id }
+          >{ service.title }</option>
+          ) )
+          }
+        </select>
+      </div>
+      <p class="mt-2 text-sm text-red-600 hidden error" id={ `${ `serviceId` }-error` }></p>
+    </div>
+
+    <div class="col-span-2">
+      <Label
+        for={ `bio` }
+        isRequired={ true }
+      > { `Biografía` } </Label>
+      <div class="mt-1 relative rounded-md shadow-sm">
+        <div class="absolute top-3 left-0 pl-3 flex items-center pointer-events-none">
+          <Icon name={ 'mdi:account-details' } size={ 24 } class="text-gray-400" />
+        </div>
+        <textarea
+          id={ `bio` }
+          name={ `bio` }
+          class={ inputClass }
+          rows={ 4 }
+        >{ data.bio }</textarea>
+      </div>
+      <p class="mt-2 text-sm text-red-600 hidden error" id={ `${ `serviceId` }-error` }></p>
+    </div>
   </div>
   <div class="mt-8">
     <p class="mt-2 text-sm text-red-600 hidden" id="default-error"></p>
@@ -97,8 +127,8 @@ const inputs = [
     <button
       class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-800 hover:bg-slate-950' focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-800 transition-colors duration-200"
     >
-      <Icon name="mdi:account-plus" size={ 24 } class="mr-2" />
-      Agregar Usuario
+      <Icon name="mdi:account-edit" size={ 24 } class="mr-2" />
+      Editar Miembro del Equipo
     </button>
   </div>
 </form>
@@ -108,8 +138,7 @@ import { actions } from 'astro:actions'
 import { navigate } from 'astro:transitions/client'
 import { getErrorList } from '@/utils'
 
-const form = document.getElementById( 'update-user-form' ) as HTMLFormElement
-console.log({ form })
+const form = document.getElementById( 'create-teamMember-form' ) as HTMLFormElement
 
 form.addEventListener( 'submit', async ( event ) => {
   event.preventDefault()
@@ -117,7 +146,7 @@ form.addEventListener( 'submit', async ( event ) => {
 
   const formData = new FormData( form )
 
-  const { error } = await actions.updateUser( formData )
+  const { error } = await actions.updateTeamMember( formData )
 
   if ( error ) {
     console.log({ error, errorType: typeof error })
@@ -130,10 +159,10 @@ form.addEventListener( 'submit', async ( event ) => {
         errorElement.classList.remove( 'hidden' )
       }
     }
-
     return
   }
 
-  navigate( '/admin/users' )
+  navigate( '/admin/team' )
 } )
 </script>
+
