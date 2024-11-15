@@ -76,7 +76,9 @@ const { service } = servicesData
             <div>
               <div class="text-sm text-gray-500"> Servicio: </div>
               <div class="font-semibold">
-                { service.title }
+                <a class="hover:text-blue-600 underline transition-colors duration-300" href={`/services/${ service.id }`}>
+                  { service.title }
+                </a>
               </div>
             </div>
           </div>
