@@ -138,7 +138,8 @@ const { teamMembers } = teamMembarsData
           'https://qualitysoft-1f745.web.app/img/angular.png',
           'https://qualitysoft-1f745.web.app/img/js.png',
           'https://qualitysoft-1f745.web.app/img/post.png',
-          'https://qualitysoft-1f745.web.app/img/mysql.png'
+          'https://qualitysoft-1f745.web.app/img/mysql.png',
+          'https://cdn.worldvectorlogo.com/logos/astrojs.svg'
           ].map( ( tech ) => (
             <div class="bg-white p-4 rounded-full shadow-lg">
               <img src={ tech } alt={ tech } class="w-20 h-20 object-contain" />
@@ -158,7 +159,14 @@ const { teamMembers } = teamMembarsData
             <img src="https://qualitysoft-1f745.web.app/img/ing.png" alt={member.name} class="w-full h-64 object-cover" />
             <div class="p-6 text-center">
               <h3 class="text-xl font-semibold mb-2">{member.name}</h3>
-              <p class="text-gray-600">{member.role}</p>
+              <p class="text-gray-600">
+                {
+                ( member.role === 'developer' ) ? 'Desarrollador' :
+                ( member.role === 'designer' ) ? 'Diseñador' :
+                ( member.role === 'manager' ) ? 'Gerente' : 'Consultor'
+                }
+              </p>
+              <p class="text-gray-600 text-pretty">{ member.bio }</p>
             </div>
           </div>
           ) )
