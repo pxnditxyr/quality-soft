@@ -156,7 +156,10 @@ const { teamMembers } = teamMembarsData
           {
           teamMembers.filter( t => t.status ).map( ( member ) => (
           <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img src="https://qualitysoft-1f745.web.app/img/ing.png" alt={member.name} class="w-full h-64 object-cover" />
+            <img
+              src={ ( member.imageUrl ) ? member.imageUrl :  `https://qualitysoft-1f745.web.app/img/ing.png` }
+              alt={member.name} class="w-full h-64 object-cover"
+            />
             <div class="p-6 text-center">
               <h3 class="text-xl font-semibold mb-2">{member.name}</h3>
               <p class="text-gray-600">
