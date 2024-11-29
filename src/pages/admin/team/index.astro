@@ -10,7 +10,8 @@ import EditButton from '@/modules/shared/components/buttons/EditButton.astro'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { formatDate } from '@/utils'
 
-const { data: teamMembersData, error: teamMemberError } = await actions.getAllTeamMembers()
+//const { data: teamMembersData, error: teamMemberError } = await actions.getAllTeamMembers()
+const { data: teamMembersData, error: teamMemberError } = await Astro.callAction( actions.getAllTeamMembers, {} )
 
 if ( teamMemberError ) return Astro.redirect( '/admin' )
 

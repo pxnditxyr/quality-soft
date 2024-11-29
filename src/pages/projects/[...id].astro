@@ -6,12 +6,15 @@ import { formatDate } from '@/utils'
 
 const { id } = Astro.params
 
-const { data: projectData, error: projectError } = await actions.getOneProject({ id })
+//const { data: projectData, error: projectError } = await actions.getOneProject({ id })
+const { data: projectData, error: projectError } = await Astro.callAction( actions.getOneProject, { id } )
+
 if ( projectError ) return Astro.redirect( '/' )
 
 const { project } = projectData
 
-const { data: servicesData, error: servicesError } = await actions.getOneService({ id: project.serviceId })
+//const { data: servicesData, error: servicesError } = await actions.getOneService({ id: project.serviceId })
+const { data: servicesData, error: servicesError } = await Astro.callAction( actions.getOneService, { id: project.serviceId } )
 if ( servicesError ) return Astro.redirect( '/' )
 
 const { service } = servicesData

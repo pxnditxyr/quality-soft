@@ -6,8 +6,8 @@ import { formatDate } from '@/utils'
 import 'sweetalert2/dist/sweetalert2.min.css'
 
 const id = Astro.params.id
-const { data: teamMemberData, error: teamMemberError } = await actions.getOneTeamMember({ id })
-console.log({ id, teamMemberData, teamMemberError })
+//const { data: teamMemberData, error: teamMemberError } = await actions.getOneTeamMember({ id })
+const { data: teamMemberData, error: teamMemberError } = await Astro.callAction( actions.getOneTeamMember, { id } )
 
 if ( teamMemberError ) return Astro.redirect( '/404' )
 

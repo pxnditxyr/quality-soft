@@ -6,7 +6,8 @@ import { formatDate } from '@/utils'
 import 'sweetalert2/dist/sweetalert2.min.css'
 
 const id = Astro.params.id
-const { data: contactData, error: contactError } = await actions.getOneContact({ id })
+//const { data: contactData, error: contactError } = await actions.getOneContact({ id })
+const { data: contactData, error: contactError } = await Astro.callAction( actions.getOneContact, { id } )
 
 if ( contactError ) return Astro.redirect( '/404' )
 
@@ -20,7 +21,8 @@ const {
 } = contact
 
 if ( state === 'new' ) {
-  await actions.setAsReadContact({ id })
+  //await actions.setAsReadContact({ id })
+  await Astro.callAction( actions.setAsReadContact, { id } )
 }
 
 ---
@@ -96,13 +98,6 @@ state === 'read' ? 'bg-yellow-300 text-yellow-800' :
                   ( state === 'answered' ) ? 'Respondido' : 'Establecer como respondido'
                 }
               </button>
-              <a
-                class="flex items-center px-4 py-2 border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-700 transition-colors duration-200"
-                href={ `/admin/contacts/edit/${ id }` }
-              >
-                <Icon name="mdi:pencil" size={ 24 } class="mr-2" />
-                Editar
-              </a>
             </div>
           </div>
         </div>

@@ -5,15 +5,18 @@ import ContactSection from '@/modules/public/components/contact/ContactSection.a
 import { Icon } from 'astro-icon/components'
 import { actions } from 'astro:actions'
 
-const { data: servicesData, error: servicesError } = await actions.getAllServices()
+//const { data: servicesData, error: servicesError } = await actions.getAllServices()
+const { data: servicesData, error: servicesError } = await Astro.callAction( actions.getAllServices, {} )
 if ( servicesError ) return Astro.redirect( '/' )
 const { services } = servicesData
 
-const { data: projectsData, error: projectsError } = await actions.getAllProjects()
+//const { data: projectsData, error: projectsError } = await actions.getAllProjects()
+const { data: projectsData, error: projectsError } = await Astro.callAction( actions.getAllProjects, {} )
 if ( projectsError ) return Astro.redirect( '/' )
 const { projects } = projectsData
 
-const { data: teamMembarsData, error: teamMembersError } = await actions.getAllTeamMembers()
+//const { data: teamMembarsData, error: teamMembersError } = await actions.getAllTeamMembers()
+const { data: teamMembarsData, error: teamMembersError } = await Astro.callAction( actions.getAllTeamMembers, {} )
 if ( teamMembersError ) return Astro.redirect( '/' )
 const { teamMembers } = teamMembarsData
 ---

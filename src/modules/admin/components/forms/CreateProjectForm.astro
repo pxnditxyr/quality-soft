@@ -3,7 +3,8 @@ import { actions } from 'astro:actions'
 import { Icon } from 'astro-icon/components'
 import Label from '@/modules/shared/components/forms/Label.astro'
 
-const { data: servicesData, error: servicesError } = await actions.getAllServices()
+//const { data: servicesData, error: servicesError } = await actions.getAllServices()
+const { data: servicesData, error: servicesError } = await Astro.callAction( actions.getAllServices, {} )
 if ( servicesError ) return Astro.redirect( '/admin/services' )
 
 const { services } = servicesData

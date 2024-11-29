@@ -6,8 +6,8 @@ import { formatDate } from '@/utils'
 import 'sweetalert2/dist/sweetalert2.min.css'
 
 const id = Astro.params.id
-const { data: projectData, error: projectError } = await actions.getOneProject({ id })
-console.log({ id, projectData, projectError })
+//const { data: projectData, error: projectError } = await actions.getOneProject({ id })
+const { data: projectData, error: projectError } = await Astro.callAction( actions.getOneProject, { id } )
 
 if ( projectError ) return Astro.redirect( '/404' )
 

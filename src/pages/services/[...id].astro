@@ -6,7 +6,8 @@ import { formatDate } from '@/utils'
 
 const { id } = Astro.params
 
-const { data: serviceData, error: serviceError } = await actions.getOneService({ id })
+//const { data: serviceData, error: serviceError } = await actions.getOneService({ id })
+const { data: serviceData, error: serviceError } = await Astro.callAction( actions.getOneService, { id } )
 if ( serviceError ) return Astro.redirect( '/' )
 
 const { service } = serviceData

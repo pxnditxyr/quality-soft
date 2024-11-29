@@ -6,8 +6,8 @@ import { formatDate } from '@/utils'
 import 'sweetalert2/dist/sweetalert2.min.css'
 
 const id = Astro.params.id
-const { data: serviceData, error: serviceError } = await actions.getOneService({ id })
-console.log({ id, serviceData, serviceError })
+//const { data: serviceData, error: serviceError } = await actions.getOneService({ id })
+const { data: serviceData, error: serviceError } = await Astro.callAction( actions.getOneService, { id } )
 
 if ( serviceError ) return Astro.redirect( '/404' )
 
